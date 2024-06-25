@@ -1,0 +1,1 @@
+This folder is required for the processing logs from the automated SQL*Plus queries

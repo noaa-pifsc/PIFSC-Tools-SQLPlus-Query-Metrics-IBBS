@@ -1,0 +1,1 @@
+This is the directory that contains the .sql files that contain the SELECT queries that will be executed to capture the standard query metrics

@@ -1,0 +1,1 @@
+This folder is required for the exported data from the automated SQL*Plus queries

@@ -1,0 +1,11 @@
+# tnsnames.ora Network Configuration File: /usr/lib/oracle/##.##/client64/lib/network/admin
+# put Oracle configuration TNSNames information below:
+
+ST_TEST_DB_FOSS_PDB =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 155.206.241.14)(PORT = 1522))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = st_test_db_foss_pdb.sttestdbsn.sttestvcn.oraclevcn.com)
+    )
+  )

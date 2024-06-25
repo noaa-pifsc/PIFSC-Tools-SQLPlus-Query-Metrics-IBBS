@@ -1,0 +1,1 @@
+This files in this directory will be transferred to the Oracle configuration directory of the container

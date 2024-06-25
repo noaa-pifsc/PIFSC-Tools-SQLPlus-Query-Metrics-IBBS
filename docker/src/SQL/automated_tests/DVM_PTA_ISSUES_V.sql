@@ -1,0 +1,2 @@
+SELECT * FROM DVM_PTA_ISSUES_V order by 
+ISS_ID

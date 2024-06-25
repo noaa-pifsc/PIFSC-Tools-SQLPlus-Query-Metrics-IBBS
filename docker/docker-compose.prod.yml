@@ -1,0 +1,10 @@
+services:
+  sqlplus-query-metrics-ibbs:
+    volumes:
+      - "sqlplus-query-metrics-ibbs-data:/usr/src/data_exports"
+      - "sqlplus-query-metrics-ibbs-logs:/usr/src/logs"
+    environment:
+      TZ: "Pacific/Honolulu"
+volumes:
+  sqlplus-query-metrics-ibbs-data:
+  sqlplus-query-metrics-ibbs-logs:

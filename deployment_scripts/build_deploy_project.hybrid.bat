@@ -1,0 +1,1 @@
+cmd /c ""C:\Program Files\Git\bin\bash.exe" --login -i -- C:\docker\sqlplus-query-metrics-ibbs-hybrid\deployment_scripts\build_deploy_project.hybrid.sh"
