@@ -13,7 +13,7 @@ mkdir $root_directory/docker/sqlplus-query-metrics-ibbs-remote
 echo "clone the project repository"
 
 #checkout the git projects into the same temporary docker directory
-git clone -b Branch_version0.1 git@picgitlab.nmfs.local:query-metrics/sqlplus-query-metrics-ibbs.git $root_directory/docker/sqlplus-query-metrics-ibbs-remote
+git clone git@picgitlab.nmfs.local:query-metrics/sqlplus-query-metrics-ibbs.git $root_directory/docker/sqlplus-query-metrics-ibbs-remote
 
 echo "rename configuration files"
 
