@@ -40,7 +40,7 @@ SET TERMOUT OFF;
 --create the script to execute the specified query from the second parameter
 SPOOL ./temp_export_query.sql;
 
-	PROMPT &2.;;
+	PROMPT &3.;;
 
 SPOOL OFF;
 
@@ -48,7 +48,7 @@ SPOOL OFF;
 --create the script to retrieve the total number of records returned by the specified query from the second parameter
 SPOOL ./temp_count_query.sql;
 
-	PROMPT SELECT COUNT(*) AS NUM_ROWS FROM (&2.);;
+	PROMPT SELECT COUNT(*) AS NUM_ROWS FROM (&3.);;
 
 SPOOL OFF;
 
@@ -56,7 +56,7 @@ SPOOL OFF;
 --create the script to explain the specified query from the second parameter
 SPOOL ./temp_explain_query.sql;
 
-	PROMPT EXPLAIN PLAN FOR &2.;;
+	PROMPT EXPLAIN PLAN FOR &3.;;
 
 SPOOL OFF;
 
@@ -134,7 +134,7 @@ SET TERMOUT OFF;
 SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS START_TIMESTAMP, to_char(CAST(CURRENT_TIMESTAMP as date), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME from dual;
 
 --execute the export query
-spool ../data_exports/&1..csv
+spool ../data_exports/&2..csv
 START ./temp_export_query.sql
 spool off;
 
@@ -159,8 +159,8 @@ SPOOL OFF;
 
 
 --add an entry in the .csv file with associated metrics for the query that was just executed
-SPOOL ../data_exports/ibbs-query-metrics.csv append;
-PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&1.","&V_START_DATE_TIME.","&V_QUERY_COST.","&V_NUM_ROWS.","&2.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
+SPOOL ../data_exports/&V_CSV_OUTPUT_FILE_NAME. append;
+PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&1.","&V_START_DATE_TIME.","&V_QUERY_COST.","&V_NUM_ROWS.","&3.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
 SPOOL OFF;
 
 --log that the entire script has finished executing

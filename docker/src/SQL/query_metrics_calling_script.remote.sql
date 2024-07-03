@@ -26,6 +26,9 @@ SET ECHO OFF
 CONNECT &apps_credentials
 --SET ECHO ON
 
+--load the runtime configuration:
+@@./sqlplus_config/runtime_config.sql
+
 SET TERMOUT OFF
 
 --retrieve the current date and date/time
@@ -40,7 +43,6 @@ DEFINE V_LOG_FILE_NAME = query_metrics_log_&V_CURRENT_DATE..log;
 --define the local variables to indicate the scenario the SQL*Plus script is being run
 DEFINE V_APP_LOCATION_NAME = 'Remote';
 DEFINE V_DB_LOCATION_NAME = 'Remote';
-DEFINE V_DB_NAME = 'IBBS';
 
 PROMPT export OCI metrics data
 @@query_metrics_export.sql
