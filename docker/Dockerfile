@@ -1,16 +1,16 @@
 FROM ghcr.io/oracle/oraclelinux8-instantclient:19
 
-RUN yum install dos2unix \
+RUN yum install dos2unix traceroute \
 && yum clean all
 
 # copy the rest of the backend files:
 COPY ./src /usr/src
 
 # convert the shell script to unix line endings
-RUN dos2unix /usr/src/run_query_metrics.sh \
-&& dos2unix /usr/src/sh_script_config/project_config.sh
+RUN dos2unix /usr/src/scripts/*.sh \
+&& dos2unix /usr/src/scripts/sh_script_config/*.sh
 
 # change directory to the SQL source directory
 WORKDIR /usr/src/SQL
 
-CMD ["bash", "../run_query_metrics.sh"]
+CMD ["bash", "../scripts/run_query_metrics.sh"]

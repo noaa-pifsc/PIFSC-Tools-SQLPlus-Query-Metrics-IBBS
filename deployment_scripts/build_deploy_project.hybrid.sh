@@ -1,9 +1,12 @@
 #! /bin/sh
 
 # load the project configuration script to set the runtime variable values
-. ../docker/src/sh_script_config/project_config.sh
+. ../docker/src/scripts/sh_script_config/project_deploy_config.sh
 
 root_directory="/c"
+
+
+echo "running docker project in: $root_directory/docker/$project_path-hybrid/docker"
 
 # change directory to the working directory for the hybrid scenario
 cd $root_directory/docker/$project_path-hybrid/docker
