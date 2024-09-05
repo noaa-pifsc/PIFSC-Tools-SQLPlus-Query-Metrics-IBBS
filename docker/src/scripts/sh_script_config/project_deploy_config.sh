@@ -4,5 +4,5 @@
 project_path="sqlplus-query-metrics-ibbs"
 
 # project git URL value
-git_url="git@picgitlab.nmfs.local:query-metrics/sqlplus-query-metrics-ibbs.git"
+git_url="git@github.com:noaa-pifsc/PIFSC-Tools-IBBS-Web-App-Metrics.git"
 
