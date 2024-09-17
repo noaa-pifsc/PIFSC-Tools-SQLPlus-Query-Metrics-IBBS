@@ -66,7 +66,9 @@ SET ECHO OFF;
 --retrieve the current timestamp
 COLUMN NUM_ROWS new_value V_NUM_ROWS
 COLUMN START_TIMESTAMP new_value V_START_TIMESTAMP
-COLUMN START_DATE_TIME new_value V_START_DATE_TIME
+COLUMN START_DATE_TIME_UTC new_value V_START_DATE_TIME_UTC
+COLUMN START_DATE_TIME_HST new_value V_START_DATE_TIME_HST
+
 
 --retrieve the current timestamp
 SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
@@ -130,7 +132,7 @@ SPOOL OFF;
 SET TERMOUT OFF;
 
 --capture the timestamp before the query is sent
-SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS START_TIMESTAMP, to_char(CAST(CURRENT_TIMESTAMP as date), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME from dual;
+SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS START_TIMESTAMP, to_char(CAST(CURRENT_TIMESTAMP as date), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_UTC, to_char(CAST (FROM_TZ (CURRENT_TIMESTAMP, 'GMT') AT TIME ZONE 'Pacific/Honolulu' AS DATE), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_HST from dual;
 
 --execute the export query
 spool ../data_exports/&1..csv
@@ -159,7 +161,7 @@ SPOOL OFF;
 
 --add an entry in the .csv file with associated metrics for the query that was just executed
 SPOOL ../data_exports/&V_CSV_OUTPUT_FILE_NAME. append;
-PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&1.","&V_START_DATE_TIME.","&V_QUERY_COST.","&V_NUM_ROWS.","&2.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
+PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&1.","&V_START_DATE_TIME_UTC.","&V_START_DATE_TIME_HST.","&V_QUERY_COST.","&V_NUM_ROWS.","&2.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
 SPOOL OFF;
 
 --log that the entire script has finished executing

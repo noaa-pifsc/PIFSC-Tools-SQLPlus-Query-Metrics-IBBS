@@ -30,7 +30,7 @@ echo "rename configuration files"
 mv $full_project_path/SQL/query_metrics_calling_script.remote.sql $full_project_path/SQL/query_metrics_calling_script.sql
 
 # remove the local and hybrid scripts
-rm $full_project_path/src/SQL/query_metrics_calling_script.local.sql
+rm $full_project_path/SQL/query_metrics_calling_script.local.sql
 
 rm $full_project_path/SQL/query_metrics_calling_script.hybrid.sql
 
