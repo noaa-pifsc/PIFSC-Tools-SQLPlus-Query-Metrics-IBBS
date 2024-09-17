@@ -12,6 +12,7 @@ This project was developed to provide an automated method to capture performance
         -   SQLPlus Query Metrics Version Control Information:
             -   URL: git@github.com:noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics.git
             -   Version: 1.2 (Git tag: sqlplus_query_metrics_v1.2)
+-   [Detailed/Summary performance metrics](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?usp=drive_link&ouid=107579489323446884981&rtpof=true&sd=true)
 
 ## Scenarios
 -   There are three different scenarios implemented by the docker project:
