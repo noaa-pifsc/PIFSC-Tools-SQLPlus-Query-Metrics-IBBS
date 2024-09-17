@@ -26,6 +26,8 @@ SET ECHO OFF
 CONNECT &apps_credentials
 --SET ECHO ON
 
+ALTER SESSION SET TIME_ZONE = 'Pacific/Honolulu';
+
 --load the runtime configuration:
 @@./sqlplus_config/runtime_config.sql
 
