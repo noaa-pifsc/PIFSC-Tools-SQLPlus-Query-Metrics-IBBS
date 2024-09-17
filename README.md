@@ -13,6 +13,9 @@ This project was developed to provide an automated method to capture performance
             -   URL: git@github.com:noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics.git
             -   Version: 1.2 (Git tag: sqlplus_query_metrics_v1.2)
 -   [Detailed/Summary performance metrics](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?usp=drive_link&ouid=107579489323446884981&rtpof=true&sd=true)
+    -   The project was configured to run on an hourly basis each weekday for 12 hours (from 7 AM to 7 PM HST)
+    -   The [ibbs-query-metrics tab](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?gid=2040068626#gid=2040068626) contains the detailed information for each query that was executed and the corresponding metrics that were captured
+    -   The [Summary tab](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?gid=1385076456#gid=1385076456) contains the summarized information with comparisons between the different scenarios
 
 ## Scenarios
 -   There are three different scenarios implemented by the docker project:
