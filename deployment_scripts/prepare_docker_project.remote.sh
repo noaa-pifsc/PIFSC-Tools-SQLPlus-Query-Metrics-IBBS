@@ -5,6 +5,8 @@
 
 # prompt the user for the preparation folder base directory
 echo "Please specify the base directory that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c for Windows, /home/webd/docker for Linux)"
+echo 
+echo "Preparation Folder Base Directory: "
 
 # define the base directory for the prepared working directory (the directory that will be used to build and execute the docker container)
 read base_directory
