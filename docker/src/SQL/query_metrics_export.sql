@@ -1,6 +1,7 @@
 --SET ECHO ON;
 SET SERVEROUTPUT ON;
 
+ALTER SESSION SET TIME_ZONE = 'UTC';
 
 --retrieve the current timestamp
 SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
