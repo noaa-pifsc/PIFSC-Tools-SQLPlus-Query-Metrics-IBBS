@@ -1,0 +1,33 @@
+X develop automation schedule (cron job) for executing the existing docker images (hourly between 7 AM to 7 PM each day)
+	X Implement as a Windows scheduled task
+
+
+X Implement TNSNames.ora for the docker container	
+
+
+X Specify V_DB_NAME in a configuration.sql file so the user doesn't have to change the calling script
+	They could also change the output file name so there doesn't need to separate calling scripts at all for the forked repositories
+
+X Change deployment scripts so they use variables instead (e.g. repository URL, deployment path, etc.)
+	X This way the configuration files change but the main scripts will be the same as the upstream repository)
+	
+	
+Elapsed time of the query
+	grant select any dictionary to LHP_INTL_BIO;
+	select SQL_TEXT, elapsed_time from v$sql where SQL_TEXT LIKE '%%';
+		https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/V-SQL.html
+		Elapsed database time (in microseconds) used by this cursor for parsing, executing, and fetching. If the cursor uses parallel execution, then ELAPSED_TIME is the cumulative time for the query coordinator, plus all parallel query slave processes.
+		- *Note: after I converted this number was larger than the timer (e.g. 53.8s for elapsed_time and 1.368 to download the .csv data)
+
+		AUTOTRACE didn't provide execution time
+		
+		SET TIMING ON didn't provide execution time
+
+	Tried using DBA_HIST_SQLSTAT to get CPU_TIME_TOTAL, ELAPSED_TIME_TOTAL from the query that was used to export the data in .csv format but sometimes it would return no rows or many rows for the same SQL_ID value
+		This was not a reliable way to get the execution time
+		Also, the _TOTAL columns are cumulative for each time the query was executed
+		_DELTA columns are just the difference between the last time the query was executed and this time the query was executed, it does not provide the total time the 
+		
+	Tried to use SQL Trace but it creates files on the server that need to be converted to human-readable values using a command line utility, this is not feasible for automated extraction of timing information
+
+X implement traceroute loop while the queries are executing

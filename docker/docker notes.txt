@@ -1,0 +1,119 @@
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d  --build
+
+
+sqlplus /nolog @OCI_metrics_dev_query_export.sql
+
+docker run -d pifsc/sqlplus-query-metrics-ibbs tail -f /dev/null
+
+docker exec -it pifsc/sqlplus-query-metrics-ibbs bash
+	
+docker run -it --entrypoint bash noaa/sqlplus
+
+To do:
+
+	how to calculate fractional seconds in SQLPlus?
+	Get the following information from the given query:
+		X (not feasible or accurate) cardinality
+		X cost
+		_ size of output file in MB
+		X number of result set rows
+		
+		
+	Result file output:
+		View/Query Name
+		number of rows
+		total cost
+		size in MB of output file
+		Date/Time
+		
+		
+		
+	
+	
+	
+	(last resort only) Create the bash script to parse the output of the query processing log and 
+	
+	
+	
+		do we setup a temporary table so the results can be exported to a .csv file too?
+	This would make it easy to import into a spreadsheet
+	
+	We can generate the .csv file by delimiting the values, avoid creating/dropping objects
+	
+	
+	store the query in a variable (can't do this -> max size for substitution variable is 240 chars
+		http://docs.oracle.com/database/121/SQPUG/apa.htm#SQPUG141
+		
+	include the query in the output so we know which query was which
+	
+	call the sqlplus script with parameters (query specified as an argument)?
+		
+	
+	
+	
+	_ dbms_lob from file path?
+		Don't want to load the entire file contents just to determine the size
+
+
+
+	we can call a SQL script directly from a file
+		--we can read the contents of the file -> to add it to a csv file 
+		--we can execute the SQL script
+		--how do we generate the explain plan query?
+			--generate a temporary file and execute it?
+		
+	How do we loop through a specified number of files?
+		SQLplus script is required to run to spool the results
+		
+
+
+
+
+Maybe the bash script can loop through all SQL files in a given directory?
+	take the name of the file as the name of the query
+	call the sqlplus script using the file name as a parameter
+	
+	sqlplus script will take the script name and read the file
+		Temporary file can be generated for the EXPLAIN plan (EXPLAIN PLAN FOR [SQL]);
+		Temporary file can be generated for the spool query (to generate the csv file)
+		PL/SQL can retrieve the size of the csv file
+		Temporary file can be generated for the number of rows
+		
+		
+		generate a comma-delimited list of values with the values derived from the queries
+			SPOOL and write the values
+		
+	
+	Business rules:
+		put all scripts into the SQL/automated_tests/ as .sql files
+		Define a single query that will be tested into the file without a semicolon
+		
+		
+	
+	
+	
+	
+	
+	options for passing in queries dynamically:
+		define in a file 
+			issues:
+				How to read a local file into a variable
+				how to create/delete temporary files
+				
+			
+			
+		define as a parameter 
+			issues: 
+				query size limitation
+				how to execute SQL to spool the .csv file
+			
+				possibilities: 
+					could try to spool the substitution variable into a file dynamically
+			
+			benefits:
+				Could develop a calling script to execute the data metrics script with different queries based on parameters 
+			
+			
+			
+			
+	
