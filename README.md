@@ -5,7 +5,7 @@ This project was developed to provide an automated method to capture performance
 
 ## Resources
 -   SQLPlus Query Metrics - IBBS Version Control Information:
-    -   URL: git@github.com:noaa-pifsc/PIFSC-Tools-SQLPlus-Query-Metrics-IBBS.git
+    -   URL: https://github.com/noaa-pifsc/PIFSC-Tools-SQLPlus-Query-Metrics-IBBS.git
     -   Version: 1.2 (Git tag: ibbs_sqlplus_query_metrics_v1.2)
     -   Forked repository (upstream)
         -   [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics/blob/main/README.md)
