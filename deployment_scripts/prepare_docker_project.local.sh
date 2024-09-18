@@ -59,9 +59,9 @@ rm $full_project_path/scripts/sh_script_config/project_scenario_config.remote.sh
 rm $full_project_path/scripts/sh_script_config/project_scenario_config.hybrid.sh
 
 # remove the preparation scripts:
-rm $base_directory/deployment_scripts/prepare_docker_project.local.sh
-rm $base_directory/deployment_scripts/prepare_docker_project.hybrid.sh
-rm $base_directory/deployment_scripts/prepare_docker_project.remote.sh
+rm $base_directory"/docker/"$project_folder_name"/deployment_scripts/prepare_docker_project.local.sh"
+rm $base_directory"/docker/"$project_folder_name"/deployment_scripts/prepare_docker_project.hybrid.sh"
+rm $base_directory"/docker/"$project_folder_name"/deployment_scripts/prepare_docker_project.remote.sh"
 
 
 
