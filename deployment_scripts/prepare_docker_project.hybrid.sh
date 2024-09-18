@@ -1,28 +1,33 @@
-#! /bin/sh
+#! /bin/bash
 
 # load the project configuration script to set the runtime variable values
 . ../docker/src/scripts/sh_script_config/project_deploy_config.sh
 
+# prompt the user for the preparation folder base directory
+echo "Please specify the base directory that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c for Windows, /home/webd/docker for Linux)"
+
+# define the base directory for the prepared working directory (the directory that will be used to build and execute the docker container)
+read base_directory
+
+# base_directory="/c"
+
 #deployment script for hybrid scenario
-
 echo "running hybrid scenario deployment script"
-
-root_directory="/c"
 
 # construct the project folder name:
 project_folder_name=$project_path"-hybrid"
 
 # construct the full project path
-full_project_path=$root_directory"/docker/"$project_folder_name"/docker/src"
+full_project_path=$base_directory"/docker/"$project_folder_name"/docker/src"
 
-mkdir $root_directory/docker
-rm -rf $root_directory/docker/$project_folder_name
-mkdir $root_directory/docker/$project_folder_name
+mkdir $base_directory/docker
+rm -rf $base_directory/docker/$project_folder_name
+mkdir $base_directory/docker/$project_folder_name
 
 echo "clone the project repository"
 
 #checkout the git projects into the same temporary docker directory
-git clone  $git_url $root_directory/docker/$project_folder_name
+git clone  $git_url $base_directory/docker/$project_folder_name
 
 echo "rename configuration files"
 

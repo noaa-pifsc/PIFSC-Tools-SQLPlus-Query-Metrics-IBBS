@@ -1,10 +1,10 @@
-#! /bin/sh
+#! /bin/bash
 
 # load the project configuration script to set the runtime variable values
 . ../docker/src/scripts/sh_script_config/project_deploy_config.sh
 
 # prompt the user for the preparation folder base directory
-echo Please specify the base directory that will be used for the preparation folder (where the docker container will be built and executed from)
+echo "Please specify the base directory that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c for Windows, /home/webd/docker for Linux)"
 
 # define the base directory for the prepared working directory (the directory that will be used to build and execute the docker container)
 read base_directory
