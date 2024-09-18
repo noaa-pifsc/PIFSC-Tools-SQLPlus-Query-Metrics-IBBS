@@ -1,6 +1,8 @@
 --SET ECHO ON;
 SET SERVEROUTPUT ON;
 
+SET DEFINE ON
+
 --define the columns for the current date and date/time in UTC
 COLUMN CURRENT_DATE_UTC new_value V_CURRENT_DATE_UTC
 COLUMN CURRENT_DATE_TIME_UTC new_value V_CURRENT_DATE_TIME_UTC
@@ -20,8 +22,8 @@ SET TERMOUT ON;
 
 --log the information for the current query
 SPOOL ../logs/&V_LOG_FILE_NAME append;
+PROMPT &V_CURRENT_DATE_TIME_UTC. - **Note: All dates/times shown are in UTC unless otherwise specified
 PROMPT &V_CURRENT_DATE_TIME_UTC. - Connected as &_USER
-PROMPT &V_CURRENT_DATE_TIME_UTC. - **Note: All dates/times shown are in UTC unless specified otherwise
 PROMPT &V_CURRENT_DATE_TIME_UTC. - Running the SQLPlus Tests using the Database "&V_DB_NAME." from the application location "&V_APP_LOCATION_NAME." and DB location "&V_DB_LOCATION_NAME."
 PROMPT &V_CURRENT_DATE_TIME_UTC. - Retrieve the query metrics data for the query &1.
 SPOOL OFF;
