@@ -26,21 +26,11 @@ SET ECHO OFF
 CONNECT &apps_credentials
 --SET ECHO ON
 
-ALTER SESSION SET TIME_ZONE = 'Pacific/Honolulu';
-
 --load the runtime configuration:
 @@./sqlplus_config/runtime_config.sql
 
 SET TERMOUT OFF
 
---retrieve the current date and date/time
-COLUMN CURRENT_DATE_TIME new_value V_CURRENT_DATE_TIME
-COLUMN CURRENT_DATE new_value V_CURRENT_DATE
-
-SELECT to_char(SYSDATE, 'YYYYMMDD') AS CURRENT_DATE from dual;
-
-
-DEFINE V_LOG_FILE_NAME = query_metrics_log_&V_CURRENT_DATE..log;
 
 --define the local variables to indicate the scenario the SQL*Plus script is being run
 DEFINE V_APP_LOCATION_NAME = 'Local';
