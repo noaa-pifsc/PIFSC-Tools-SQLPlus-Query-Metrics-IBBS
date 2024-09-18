@@ -57,6 +57,11 @@ rm $full_project_path/scripts/sh_script_config/project_scenario_config.local.sh
 rm $full_project_path/scripts/sh_script_config/project_scenario_config.remote.sh
 
 
+# remove the local and hybrid preparation scripts:
+rm $full_project_path/deployment_scripts/prepare_docker_project.local.sh
+rm $full_project_path/deployment_scripts/prepare_docker_project.hybrid.sh
+rm $full_project_path/deployment_scripts/prepare_docker_project.remote.sh
+
 echo ""
 echo "the hybrid docker project files are now ready for configuration and image building/deployment"
 

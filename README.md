@@ -6,7 +6,7 @@ This project was developed to provide an automated method to capture performance
 ## Resources
 -   SQLPlus Query Metrics - IBBS Version Control Information:
     -   URL: https://github.com/noaa-pifsc/PIFSC-Tools-SQLPlus-Query-Metrics-IBBS.git
-    -   Version: 1.2 (Git tag: ibbs_sqlplus_query_metrics_v1.2)
+    -   Version: 1.3 (Git tag: ibbs_sqlplus_query_metrics_v1.3)
     -   Forked repository (upstream)
         -   [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics/blob/main/README.md)
         -   SQLPlus Query Metrics Version Control Information:
@@ -28,9 +28,9 @@ This project was developed to provide an automated method to capture performance
     -   The links in this documentation will work if you are viewing the README from the working directory
 -   Execute the appropriate docker preparation script stored in the [deployment_scripts](./deployment_scripts) folder to prepare the docker container for deployment in a new preparation folder
     -   For example use the [prepare_docker_project.remote.sh](./deployment_scripts/prepare_docker_project.remote.sh) bash script to prepare the docker container for deployment in the remote scenario
-		-   When prompted specify the base directory where the project will be prepared (e.g. /c for Windows, /home/webd/docker for Linux), this will set the value of **$base_directory** used within the preparation script
-		-   The preparation script will clone the project into a new preparation folder based on the value of **$base_directory** (e.g. **$base_directory**/docker/sqlplus-query-metrics-ibbs-remote preparation folder for the remote scenario) and configure the docker project
-		-   This preparation folder will be used to build and execute the docker container
+    -   When prompted specify the base directory where the project will be prepared (e.g. /c for Windows, /home/webd/docker for Linux), this will set the value of **$base_directory** used within the preparation script
+        -   The preparation script will clone the project into a new preparation folder based on the value of **$base_directory** (e.g. **$base_directory**/docker/sqlplus-query-metrics-ibbs-remote preparation folder for the remote scenario) and configure the docker project
+        -   This preparation folder will be used to build and execute the docker container
 -   In the preparation folder update the DB_credentials.sql file to specify the Oracle SQL\*Plus database connection string (e.g. **$base_directory**/docker/sqlplus-query-metrics-ibbs-remote/docker/src/SQL/credentials/DB_credentials.sql for the remote scenario)
 -   \*Note: more information about the setup procedure for this forked project is available in the [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#forked-repository-implementation)
 

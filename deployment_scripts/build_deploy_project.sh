@@ -6,8 +6,8 @@
 # change directory to the working directory for the remote scenario
 cd ../docker
 
-# build and execute the docker container for the remote scenario
+# build and execute the docker container for the current scenario
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d  --build
 
 # notify the user that the container has finished executing
-echo "The docker container for the remote scenario has finished executing"
+echo "The docker container has finished building and is running"
