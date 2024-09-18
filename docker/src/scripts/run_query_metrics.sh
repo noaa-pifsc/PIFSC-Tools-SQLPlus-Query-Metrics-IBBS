@@ -4,11 +4,6 @@
 . ../scripts/sh_script_config/project_runtime_config.sh
 . ../scripts/sh_script_config/project_scenario_config.sh
 
-# set the timezone to UTC
-date
-timedatectl set-timezone UTC
-date
-
 # check the location of the DB and container:
 
 if [ "$database_location" = "local" ]  && [ "$container_location" = "local" ];

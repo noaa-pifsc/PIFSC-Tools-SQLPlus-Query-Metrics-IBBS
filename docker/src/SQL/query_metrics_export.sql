@@ -1,10 +1,8 @@
 --SET ECHO ON;
 SET SERVEROUTPUT ON;
 
-ALTER SESSION SET TIME_ZONE = 'UTC';
-
 --retrieve the current timestamp
-SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
+SELECT to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME_UTC from dual;
 
 SET ECHO OFF;
 
@@ -15,9 +13,9 @@ SET TERMOUT ON;
 
 --log the information for the current query
 SPOOL ../logs/&V_LOG_FILE_NAME append;
-PROMPT &V_CURRENT_DATE_TIME. - Connected as &_USER
-PROMPT &V_CURRENT_DATE_TIME. - Running the SQLPlus Tests using the Database "&V_DB_NAME." from the application location "&V_APP_LOCATION_NAME." and DB location "&V_DB_LOCATION_NAME."
-PROMPT &V_CURRENT_DATE_TIME. - Retrieve the query metrics data for the query &1.
+PROMPT &V_CURRENT_DATE_TIME_UTC. - Connected as &_USER
+PROMPT &V_CURRENT_DATE_TIME_UTC. - Running the SQLPlus Tests using the Database "&V_DB_NAME." from the application location "&V_APP_LOCATION_NAME." and DB location "&V_DB_LOCATION_NAME."
+PROMPT &V_CURRENT_DATE_TIME_UTC. - Retrieve the query metrics data for the query &1.
 SPOOL OFF;
 
 
@@ -26,11 +24,11 @@ SET TERMOUT OFF;
 
 
 --retrieve the current timestamp
-SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
+SELECT to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME_UTC from dual;
 SET TERMOUT ON;
 
 SPOOL ../logs/&V_LOG_FILE_NAME append;
-PROMPT &V_CURRENT_DATE_TIME. - Generate the metrics queries from the specified query
+PROMPT &V_CURRENT_DATE_TIME_UTC. - Generate the metrics queries from the specified query
 SPOOL OFF;
 
 SET TERMOUT OFF;
@@ -72,12 +70,12 @@ COLUMN START_DATE_TIME_HST new_value V_START_DATE_TIME_HST
 
 
 --retrieve the current timestamp
-SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
+SELECT to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME_UTC from dual;
 SET TERMOUT ON;
 
 --log that the count(*) query is being executed
 SPOOL ../logs/&V_LOG_FILE_NAME append;
-PROMPT &V_CURRENT_DATE_TIME. - retrieve the number of rows returned by the specified query
+PROMPT &V_CURRENT_DATE_TIME_UTC. - retrieve the number of rows returned by the specified query
 SPOOL OFF;
 
 SET TERMOUT OFF;
@@ -86,12 +84,12 @@ SET TERMOUT OFF;
 START ./temp_count_query.sql;
 
 --retrieve the current timestamp
-SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
+SELECT to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME_UTC from dual;
 SET TERMOUT ON;
 
 --log that the explain plan query is being executed
 SPOOL ../logs/&V_LOG_FILE_NAME append;
-PROMPT &V_CURRENT_DATE_TIME. - retrieve the explain plan from the query
+PROMPT &V_CURRENT_DATE_TIME_UTC. - retrieve the explain plan from the query
 SPOOL OFF;
 
 SET TERMOUT OFF;
@@ -122,18 +120,24 @@ SET LONG 2000;
 
 
 --retrieve the current timestamp
-SELECT to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
+SELECT to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME_UTC from dual;
 SET TERMOUT ON;
 
 --log that the SELECT query is being executed and the results are being saved
 SPOOL ../logs/&V_LOG_FILE_NAME append;
-PROMPT &V_CURRENT_DATE_TIME. - execute the query and download the results
+PROMPT &V_CURRENT_DATE_TIME_UTC. - execute the query and download the results
 SPOOL OFF;
 
 SET TERMOUT OFF;
 
 --capture the timestamp before the query is sent
-SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS START_TIMESTAMP, to_char(CAST(CURRENT_TIMESTAMP as date), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_UTC, to_char(CAST (FROM_TZ (CURRENT_TIMESTAMP, 'GMT') AT TIME ZONE 'Pacific/Honolulu' AS DATE), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_HST from dual;
+SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS START_TIMESTAMP, 
+
+--capture the start date/time in the UTC time zone
+to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_UTC, 
+
+--capture the start date/time in the Pacific/Honolulu time zone
+to_char(CAST (CURRENT_TIMESTAMP AT TIME ZONE 'Pacific/Honolulu' AS DATE), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_HST from dual;
 
 --execute the export query
 spool ../data_exports/&1..csv
@@ -143,7 +147,7 @@ spool off;
 
 --retrieve the current timestamp
 COLUMN END_TIMESTAMP new_value V_END_TIMESTAMP
-SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS END_TIMESTAMP, to_char(CAST(CURRENT_TIMESTAMP as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME from dual;
+SELECT to_char(CURRENT_TIMESTAMP, 'YYYYMMDD HH:MI:SS.FF3 AM') AS END_TIMESTAMP, to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'YYYYMMDD HH:MI:SS AM') AS CURRENT_DATE_TIME_UTC from dual;
 
 
 --calculate the total time between when the query was sent and the response was received
@@ -154,7 +158,7 @@ SET TERMOUT ON;
 
 --add a logging message for the total time the data export took:
 SPOOL ../logs/&V_LOG_FILE_NAME append;
-PROMPT &V_CURRENT_DATE_TIME. - metrics data export has completed, the entire process took &V_ELAPSED_TIME_SEC. seconds
+PROMPT &V_CURRENT_DATE_TIME_UTC. - metrics data export has completed, the entire process took &V_ELAPSED_TIME_SEC. seconds
 SPOOL OFF;
 
 
@@ -167,7 +171,7 @@ SPOOL OFF;
 
 --log that the entire script has finished executing
 SPOOL ../logs/&V_LOG_FILE_NAME. append;
-PROMPT &V_CURRENT_DATE_TIME. - Finished capturing metrics for the query: &1.
+PROMPT &V_CURRENT_DATE_TIME_UTC. - Finished capturing metrics for the query: &1.
 SPOOL OFF;
 
 
