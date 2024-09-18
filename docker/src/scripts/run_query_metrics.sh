@@ -36,7 +36,7 @@ echo "this is a remote DB and local container, run the local traceroute script o
 else
 # remote DB and container
 
-echo "this is a remote DB and container, run the local traceroute script in a loop"
+echo "this is a remote DB and container, run the remote traceroute script in a loop"
 
 # spawn the local traceroute script that runs in a loop
 . ../scripts/traceroute_loop.sh $remote_traceroute_destination "remote" $traceroute_wait_in_s &
