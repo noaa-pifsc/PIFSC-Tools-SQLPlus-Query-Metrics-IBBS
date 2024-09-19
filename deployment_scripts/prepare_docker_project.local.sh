@@ -14,7 +14,9 @@ echo "Preparation Folder Base Directory: "
 # define the base directory for the prepared working directory (the directory that will be used to build and execute the docker container)
 read base_directory
 
-# base_directory="/c"
+echo "The value of base_directory is: $base_directory"
+
+base_directory = eval $base_directory
 
 #deployment script for local scenario
 echo "running local scenario deployment script"
