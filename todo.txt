@@ -63,14 +63,22 @@ Ahi deployment:
 	
 	
 	
-docker volume copy
+# show all docker containers
+docker container ls -a.
+
+
+	
+docker volume copy (source: https://stackoverflow.com/questions/35406213/how-to-copy-data-from-docker-volume-to-host)
 	cmd /c ""C:\Program Files\Git\bin\bash.exe"
 
 	CID=$(docker run -d -v docker_sqlplus-query-metrics-ibbs-data:/docker_sqlplus-query-metrics-ibbs-data busybox true)
 	
 
-	docker cp $CID:/docker_sqlplus-query-metrics-ibbs-data ./
+	sudo docker cp $CID:/docker_sqlplus-query-metrics-ibbs-data ./
 
 	docker rm $CID
+	
+	
+	docker rm ./
 	
 	

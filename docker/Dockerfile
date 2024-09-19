@@ -9,6 +9,9 @@ ENV TZ=UTC
 # copy the rest of the backend files:
 COPY ./src /usr/src
 
+RUN chmod -R 777 /usr/src/data_exports
+RUN chmod -R 777 /usr/src/logs
+
 # convert the shell script to unix line endings
 RUN dos2unix /usr/src/scripts/*.sh \
 && dos2unix /usr/src/scripts/sh_script_config/*.sh
