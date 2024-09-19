@@ -31,3 +31,46 @@ Elapsed time of the query
 	Tried to use SQL Trace but it creates files on the server that need to be converted to human-readable values using a command line utility, this is not feasible for automated extraction of timing information
 
 X implement traceroute loop while the queries are executing
+
+
+
+
+
+Ahi deployment:
+
+	cd /tmp/jabdul
+	# remove the working directory (if any)
+	rm -rf *
+	
+	# clone the repository
+	git clone --branch branch_OCI_deployment https://github.com/noaa-pifsc/PIFSC-Tools-SQLPlus-Query-Metrics-IBBS.git
+	
+	# run the deployment script
+	bash ./PIFSC-Tools-SQLPlus-Query-Metrics-IBBS/deployment_scripts/prepare_docker_project.local.sh
+	
+	# when prompted enter the following:
+	/home/webd/docker/pirrid
+	
+	# update the credentials file:
+	vim /home/webd/docker/pirrid/docker/sqlplus-query-metrics-ibbs-local/docker/src/SQL/credentials/DB_credentials.sql
+	
+	# specify the credentials:
+	
+	
+	# run the docker container:
+	bash /home/webd/docker/pirrid/docker/sqlplus-query-metrics-ibbs-local/deployment_scripts/build_deploy_project.sh
+	
+	
+	
+	
+docker volume copy
+	cmd /c ""C:\Program Files\Git\bin\bash.exe"
+
+	CID=$(docker run -d -v docker_sqlplus-query-metrics-ibbs-data:/docker_sqlplus-query-metrics-ibbs-data busybox true)
+	
+
+	docker cp $CID:/docker_sqlplus-query-metrics-ibbs-data ./
+
+	docker rm $CID
+	
+	

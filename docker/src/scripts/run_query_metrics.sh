@@ -84,7 +84,7 @@ filesize=$(ls -l ../data_exports/$filename.csv | awk '{print $5}')
 # echo $filesize
 
 # replace the [FILE_SIZE] placeholder with the actual size of the exported data file for the sqlplus query
-sed -i -e "s/\[FILE_SIZE\]/$filesize/g" ../data_exports/$csv_output_file_name
+sed -i -e "s/\[FILE_SIZE\]/$filesize/g" ../data_exports/query_results/$csv_output_file_name
 
 ); done
 
