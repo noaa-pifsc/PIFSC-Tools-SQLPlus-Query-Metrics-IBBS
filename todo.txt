@@ -67,6 +67,44 @@ Ahi deployment:
 docker container ls -a.
 
 
+
+docker volume copy (source: https://stackoverflow.com/questions/35406213/how-to-copy-data-from-docker-volume-to-host)
+	update Dockerfile to leave it running once it's executed (https://stackoverflow.com/questions/25775266/how-to-keep-docker-container-running-after-starting-services):
+	
+	# update Dockerfile
+		vim /home/webd/docker/pirrid/docker/sqlplus-query-metrics-ibbs-local/docker/Dockerfile	
+	
+	# add the following at the end fo Dockerfile:
+		
+		ENTRYPOINT ["tail", "-f", "/dev/null"]
+		
+	# run the container
+		bash /home/webd/docker/pirrid/docker/sqlplus-query-metrics-ibbs-local/deployment_scripts/build_deploy_project.sh
+		
+	# connect to the container:
+		docker exec -it [CONTAINER_ID] bash
+		
+		
+	# wait until container is finished executing, then change the permissions on the container file:
+		chmod 777 ../data_exports/ibbs-query-metrics.csv
+	
+
+	# copy the file 
+		docker cp [CONTAINER_ID]:/usr/src/data_exports/ibbs-query-metrics.csv /tmp/jabdul/ibbs-query-metrics.csv
+	
+	# shutdown the container
+		docker container stop [CONTAINER_ID]
+	
+	# update the Dockerfile to revert the changes (comment out ENTRYPOINT line):
+		
+		vim /home/webd/docker/pirrid/docker/sqlplus-query-metrics-ibbs-local/docker/Dockerfile	
+		
+	
+	
+
+
+
+
 	
 docker volume copy (source: https://stackoverflow.com/questions/35406213/how-to-copy-data-from-docker-volume-to-host)
 	cmd /c ""C:\Program Files\Git\bin\bash.exe"
@@ -81,4 +119,6 @@ docker volume copy (source: https://stackoverflow.com/questions/35406213/how-to-
 	
 	docker rm ./
 	
+	
+
 	
