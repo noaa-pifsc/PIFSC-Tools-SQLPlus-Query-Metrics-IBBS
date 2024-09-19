@@ -24,24 +24,24 @@ This project was developed to provide an automated method to capture performance
     -   Hybrid - this scenario deploys the docker container to a local docker host and connects to a remote Oracle database
 
 ## Setup Procedure
--   Clone this repository into a working directory
+-   ### Clone the repository
     ```
     # clone the repository into a working directory that will be used to prepare the container for execution:
     git clone https://github.com/noaa-pifsc/PIFSC-Tools-SQLPlus-Query-Metrics-IBBS.git
     ```
--   Execute the appropriate docker preparation script stored in the [deployment_scripts](./deployment_scripts) folder to prepare the docker container for deployment in a new preparation folder
+-   ### Prepare the docker container
+    -   Set the \$base_directory bash/environment variables to define the base directory location where the docker application will be built and executed
     ```
-    # change to directory containing the cloned repository:
-    cd PIFSC-Tools-SQLPlus-Query-Metrics-IBBS
-
-    # define the $base_directory variable to make it easy to execute the preparation and deployment bash scripts:
+    # define the $base_directory variable (e.g. /home/webd/docker) to make it easy to execute the preparation and deployment bash scripts:
     base_directory="[PATH TO PREPARATION FOLDER]"
 
     # define the value of $base_directory as an environment variable
     export base_directory
-
+    ```
+    -   Execute the preparation bash script:
+    ```
     # execute the prepration script (in this example the remote scenario, but it can be changed for any of the scenarios):
-    bash ./deployment_scripts/prepare_docker_project.remote.sh
+    bash ./PIFSC-Tools-SQLPlus-Query-Metrics-IBBS/deployment_scripts/prepare_docker_project.remote.sh
     ```
     -   For example use the [prepare_docker_project.remote.sh](./deployment_scripts/prepare_docker_project.remote.sh) bash script to prepare the docker container for deployment in the remote scenario
     -   When prompted specify the base directory where the project will be prepared (e.g. /c for Windows, /home/webd/docker for Linux), this will set the value of **$base_directory** used within the preparation script
@@ -59,7 +59,7 @@ This project was developed to provide an automated method to capture performance
     -   On Linux this bash script can be used to automate the execution of the docker container on a timer using cron
         -   The code below is used for the remote scenario:
         ```
-        bash $base_directory/docker/sqlplus-query-metrics-ibbs-remote/deployment_scripts/build_deploy_project.sh
+        bash $base_directory/sqlplus-query-metrics-ibbs-remote/deployment_scripts/build_deploy_project.sh
         ```
     -   On Windows the batch script (build_deploy_project.bat script) can be used to automate the execution of the docker container on a timer using Scheduled Tasks
 
