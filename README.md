@@ -46,6 +46,7 @@ This project was developed to provide an automated method to capture performance
 -   Open the docker volume sqlplus-query-metrics-ibbs-logs to view the log files for the different executions of the docker container
 -   Open the docker volume sqlplus-query-metrics-ibbs-data to view the exported data files for the different queries
     -   Open the ibbs-query-metrics.csv to view the metrics that were captured for each query execution
+    -   Open the .csv files in the query_results folder to view the results of each query
 
 ## License
 See the [LICENSE.md](./LICENSE.md) for details

@@ -150,7 +150,7 @@ to_char(CAST(CURRENT_TIMESTAMP AT TIME ZONE 'UTC' as date), 'MM/DD/YYYY HH:MI:SS
 to_char(CAST (CURRENT_TIMESTAMP AT TIME ZONE 'Pacific/Honolulu' AS DATE), 'MM/DD/YYYY HH:MI:SS AM') AS START_DATE_TIME_HST from dual;
 
 --execute the export query
-spool ../data_exports/&1..csv
+spool ../data_exports/query_results/&1..csv
 START ./temp_export_query.sql
 spool off;
 
@@ -175,7 +175,7 @@ SPOOL OFF;
 
 
 --add an entry in the .csv file with associated metrics for the query that was just executed
-SPOOL ../data_exports/query_results/&V_CSV_OUTPUT_FILE_NAME. append;
+SPOOL ../data_exports/&V_CSV_OUTPUT_FILE_NAME. append;
 PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&1.","&V_START_DATE_TIME_UTC.","&V_START_DATE_TIME_HST.","&V_QUERY_COST.","&V_NUM_ROWS.","&2.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
 SPOOL OFF;
 
