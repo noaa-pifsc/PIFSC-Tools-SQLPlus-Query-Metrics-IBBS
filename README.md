@@ -35,8 +35,9 @@ This project was developed to provide an automated method to capture performance
 -   \*Note: more information about the setup procedure for this forked project is available in the [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#forked-repository-implementation)
 
 ## Building/Running Container
--   In the preparation folder execute the appropriate build and deploy script for the given scenario within the (e.g. **$base_directory**/docker/sqlplus-query-metrics-ibbs-remote/deployment_scripts/build_deploy_project.remote.sh for the remote scenario)
-    -   This bash script can be used to automate the execution of the docker container on a timer using cron
+-   In the preparation folder execute the appropriate build and deploy script for the given scenario within the (**$base_directory**/docker/sqlplus-query-metrics-ibbs-remote/deployment_scripts/build_deploy_project.sh)
+    -   On Linux this bash script can be used to automate the execution of the docker container on a timer using cron
+		-   On Windows the batch script (build_deploy_project.bat script) can be used to automate the execution of the docker container on a timer using Scheduled Tasks
 
 ## Docker Application Processing
 -   \*Note: more information about the docker application processing for this forked project is available in the [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#docker-application-processing)
