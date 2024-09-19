@@ -82,7 +82,7 @@ else
 	rm $base_directory"/"$project_folder_name"/deployment_scripts/prepare_docker_project.remote.sh"
 
 	echo ""
-	echo "the remote docker project files are now ready for configuration and image building/deployment (press Enter key to continue)"
+	echo "the local docker project files are now ready for configuration and image building/deployment (press Enter key to continue)"
 
 fi
 
