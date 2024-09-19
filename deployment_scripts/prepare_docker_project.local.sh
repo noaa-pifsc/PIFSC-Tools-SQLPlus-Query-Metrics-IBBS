@@ -8,7 +8,7 @@ echo "running local scenario deployment script"
 
 
 # check if the 
-if [[ -z "${base_directory}" ]]
+if [[ -z "${base_directory}" ]]; then
 
 	# prompt the user for the preparation folder base directory
 	echo "You must specify the base directory as an environment variable that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c/docker for Windows, /home/webd/docker for Linux)"
