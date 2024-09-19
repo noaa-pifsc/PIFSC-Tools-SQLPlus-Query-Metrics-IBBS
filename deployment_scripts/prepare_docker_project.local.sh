@@ -69,6 +69,6 @@ rm $base_directory"/docker/"$project_folder_name"/deployment_scripts/prepare_doc
 
 
 echo ""
-echo "the local docker project files are now ready for configuration and image building/deployment"
+echo "the remote docker project files are now ready for configuration and image building/deployment (press Enter key to continue)"
 
 read
