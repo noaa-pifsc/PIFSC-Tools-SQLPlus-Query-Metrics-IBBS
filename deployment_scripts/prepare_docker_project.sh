@@ -30,7 +30,7 @@ else
 	testing_scenario="hybrid"
 
 	# define the inactive scenarios (the two that are not stored in $testing_scenario)
-	inactive_scenarios=("local" "hybrid")
+	inactive_scenarios=("local" "remote")
 fi
 
 
