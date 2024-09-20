@@ -7,23 +7,29 @@
 if [[ "$database_location" == "local" ]] && [[ "$container_location" == "local" ]]; then
 	# this is a local database and container, this is a local scenario
 
+	# set the value of $testing_scenario to "local"
 	testing_scenario="local"
 	
+	# define the inactive scenarios (the two that are not stored in $testing_scenario)
 	inactive_scenarios=("hybrid" "remote")
 	
 
 elif [[ "$database_location" == "remote" ]] && [[ "$container_location" == "remote" ]]; then
 	# this is a remote database and container, this is a remote scenario
 
+	# set the value of $testing_scenario to "remote"
 	testing_scenario="remote"
 
+	# define the inactive scenarios (the two that are not stored in $testing_scenario)
 	inactive_scenarios=("local" "hybrid")
 
 else
 	# this is a remote database and local container, this is a hybrid scenario
 	
+	# set the value of $testing_scenario to "hybrid"
 	testing_scenario="hybrid"
-	
+
+	# define the inactive scenarios (the two that are not stored in $testing_scenario)
 	inactive_scenarios=("local" "hybrid")
 fi
 
@@ -48,7 +54,7 @@ if [[ -z "${base_docker_directory}" ]]; then
 fi 
 # the value of $base_docker_directory is defined, proceed with the preparation script
 
-echo "the value of \$base_docker_directory is \"$base_docker_directory\" that will be used to build and execute the docker container"
+# echo "the value of \$base_docker_directory is \"$base_docker_directory\" that will be used to build and execute the docker container"
 
 
 # construct the project folder name based on the configuration variables:
@@ -71,7 +77,7 @@ echo "clone the project repository"
 #checkout the git projects into the same temporary docker directory
 git clone  $git_url $base_docker_directory/$project_folder_name
 
-echo "rename configuration files"
+echo "rename corresponding configuration files to make them active"
 
 #rename the query_metrics_calling_script.$testing_scenario.sql to query_metrics_calling_script.sql so it can be used as the active configuration file
 mv $full_project_path/SQL/query_metrics_calling_script.$testing_scenario.sql $full_project_path/SQL/query_metrics_calling_script.sql
@@ -81,6 +87,9 @@ mv $full_project_path/oracle_configuration/tnsnames.$testing_scenario.ora $full_
 
 #rename the project_scenario_config.$testing_scenario.sh to project_scenario_config.sh so it can be used as the active configuration file
 mv $full_project_path/scripts/sh_script_config/project_scenario_config.$testing_scenario.sh $full_project_path/scripts/sh_script_config/project_scenario_config.sh
+
+
+echo "remove unused bash scripts based on the current testing scenario to prevent confusion"
 
 # remove the main preparation bash script to prevent confusion
 rm $base_docker_directory"/"$project_folder_name"/deployment_scripts/prepare_docker_project"*
@@ -102,7 +111,6 @@ do
 	rm $full_project_path"/scripts/sh_script_config/project_scenario_config."$current_inactive_scenario".sh"
 
 done
-
 
 
 
