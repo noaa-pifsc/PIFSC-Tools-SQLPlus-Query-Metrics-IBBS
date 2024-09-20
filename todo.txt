@@ -135,3 +135,10 @@ testing (9/18/24):
 		X remote
 		X local
 	
+	
+	
+	
+	# what is the best way to configure the preparation script (simple variable declaration and then call the other script)
+	
+	
+	

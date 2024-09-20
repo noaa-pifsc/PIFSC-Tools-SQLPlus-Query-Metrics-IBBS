@@ -3,28 +3,28 @@
 # load the project configuration script to set the runtime variable values
 . ../docker/src/scripts/sh_script_config/project_deploy_config.sh
 
-echo "perform the string comparisons"
-
 # determine the scenario by using the values in the variables $database_location and $container_location
 if [[ "$database_location" == "local" ]] && [[ "$container_location" == "local" ]]; then
 	# this is a local database and container, this is a local scenario
 
-	echo "this is a local database and container, this is a local scenario"
-
 	testing_scenario="local"
+	
+	inactive_scenarios=("hybrid" "remote")
+	
 
 elif [[ "$database_location" == "remote" ]] && [[ "$container_location" == "remote" ]]; then
 	# this is a remote database and container, this is a remote scenario
 
-	echo "this is a remote database and container, this is a remote scenario"
 	testing_scenario="remote"
+
+	inactive_scenarios=("local" "hybrid")
 
 else
 	# this is a remote database and local container, this is a hybrid scenario
 	
-	echo "this is a remote database and local container, this is a hybrid scenario"
-	
 	testing_scenario="hybrid"
+	
+	inactive_scenarios=("local" "hybrid")
 fi
 
 
@@ -73,37 +73,43 @@ git clone  $git_url $base_docker_directory/$project_folder_name
 
 echo "rename configuration files"
 
-#rename the query_metrics_calling_script.local.sql to query_metrics_calling_script.sql so it can be used as the active configuration file
-mv $full_project_path/SQL/query_metrics_calling_script.local.sql $full_project_path/SQL/query_metrics_calling_script.sql
+#rename the query_metrics_calling_script.$testing_scenario.sql to query_metrics_calling_script.sql so it can be used as the active configuration file
+mv $full_project_path/SQL/query_metrics_calling_script.$testing_scenario.sql $full_project_path/SQL/query_metrics_calling_script.sql
 
-# remove the remote and hybrid scripts
-rm $full_project_path/SQL/query_metrics_calling_script.remote.sql
+#rename the $testing_scenario oracle configuration file to be the active configuration file
+mv $full_project_path/oracle_configuration/tnsnames.$testing_scenario.ora $full_project_path/oracle_configuration/tnsnames.ora
 
-rm $full_project_path/SQL/query_metrics_calling_script.hybrid.sql
+#rename the project_scenario_config.$testing_scenario.sh to project_scenario_config.sh so it can be used as the active configuration file
+mv $full_project_path/scripts/sh_script_config/project_scenario_config.$testing_scenario.sh $full_project_path/scripts/sh_script_config/project_scenario_config.sh
 
-#rename the local oracle configuration file to be the active configuration file
-mv $full_project_path/oracle_configuration/tnsnames.local.ora $full_project_path/oracle_configuration/tnsnames.ora
+# remove the main preparation bash script to prevent confusion
+rm $base_docker_directory"/"$project_folder_name"/deployment_scripts/prepare_docker_project"*
 
-# remove the remote and hybrid oracle configuration files
-rm $full_project_path/oracle_configuration/tnsnames.remote.ora
+# loop through the inactive scenarios and delete the corresponding configuration files and automated SQL scripts
+for current_inactive_scenario in ${inactive_scenarios[@]}
+do
 
-rm $full_project_path/oracle_configuration/tnsnames.hybrid.ora
+	echo "the current inactive scenario is: $current_inactive_scenario"
+
+	# remove the current inactive scenario's query calling script
+	rm $full_project_path"/SQL/query_metrics_calling_script."$current_inactive_scenario".sql"
 
 
-#rename the project_scenario_config.local.sh to project_scenario_config.sh so it can be used as the active configuration file
-mv $full_project_path/scripts/sh_script_config/project_scenario_config.local.sh $full_project_path/scripts/sh_script_config/project_scenario_config.sh
+	# remove the current inactive scenario's oracle configuration files
+	rm $full_project_path"/oracle_configuration/tnsnames."$current_inactive_scenario".ora"
 
-# remove the remote and hybrid scripts
-rm $full_project_path/scripts/sh_script_config/project_scenario_config.remote.sh
+	# remove the current inactive scenario's bash configuration scripts
+	rm $full_project_path"/scripts/sh_script_config/project_scenario_config."$current_inactive_scenario".sh"
 
-rm $full_project_path/scripts/sh_script_config/project_scenario_config.hybrid.sh
+done
 
-# remove the preparation scripts:
-rm $base_docker_directory"/"$project_folder_name"/deployment_scripts/prepare_docker_project.local.sh"
-rm $base_docker_directory"/"$project_folder_name"/deployment_scripts/prepare_docker_project.hybrid.sh"
-rm $base_docker_directory"/"$project_folder_name"/deployment_scripts/prepare_docker_project.remote.sh"
+
+
 
 echo ""
-echo "the local docker project files are now ready for configuration and image building/deployment (press Enter key to continue)"
+echo "the $testing_scenario docker project files are now ready for configuration and image building/deployment"
+echo ""
+echo ""
+echo "press Enter key to continue"
 
 read
