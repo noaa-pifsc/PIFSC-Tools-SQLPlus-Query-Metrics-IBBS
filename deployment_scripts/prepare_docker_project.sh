@@ -98,7 +98,7 @@ rm $base_docker_directory"/"$project_folder_name"/deployment_scripts/prepare_doc
 for current_inactive_scenario in ${inactive_scenarios[@]}
 do
 
-	echo "the current inactive scenario is: $current_inactive_scenario"
+#	echo "the current inactive scenario is: $current_inactive_scenario"
 
 	# remove the current inactive scenario's query calling script
 	rm $full_project_path"/SQL/query_metrics_calling_script."$current_inactive_scenario".sql"
