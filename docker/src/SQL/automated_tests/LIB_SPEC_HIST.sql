@@ -1,2 +1,2 @@
-select * from LIB_SPEC_HIST
+select * from LHP_INTL_BIO.LIB_SPEC_HIST
 order by SPEC_ID, H_SEQNUM
