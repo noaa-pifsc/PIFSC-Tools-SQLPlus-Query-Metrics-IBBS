@@ -4,11 +4,11 @@
 . ../docker/src/scripts/sh_script_config/project_deploy_config.sh
 
 # determine the scenario by using the values in the variables $database_location and $container_location
-if [[$database_location == "local"]] && [[$container_location == "local"]]; then
+if [["${database_location}" == "local"]] && [["${container_location}" == "local"]]; then
 	# this is a local database and container, this is a local scenario
 	testing_scenario="local"
 
-elif [[$database_location == "remote"]] && [[$container_location == "remote"]]; then
+elif [["${database_location}" == "remote"]] && [["${container_location}" == "remote"]]; then
 	# this is a remote database and container, this is a remote scenario
 	testing_scenario="remote"
 
