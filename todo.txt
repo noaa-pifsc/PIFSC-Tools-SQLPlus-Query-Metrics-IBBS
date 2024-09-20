@@ -120,5 +120,13 @@ docker volume copy (source: https://stackoverflow.com/questions/35406213/how-to-
 	docker rm ./
 	
 	
+	
+testing:
+	Linux (ahi)
+		_ hybrid
+		X remote
+		X local
+	
+	Windows (PICV014)
 
 	
