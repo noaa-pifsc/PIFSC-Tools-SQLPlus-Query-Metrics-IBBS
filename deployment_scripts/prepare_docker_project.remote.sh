@@ -4,16 +4,13 @@
 #deployment script for remote scenario
 echo "running remote scenario deployment script"
 
-
-
-
 # check if the base_docker_directory environment variable has been defined
 if [[ -z "${base_docker_directory}" ]]; then
 	# the base_docker_directory environment variable has not been defined
 
 	# prompt the user for the preparation folder base directory
 	echo "A \$base_docker_directory environment variable has not been defined."
-	echo "You must specify the base directory as an environment variable that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c/docker for Windows, /home/webd/docker for Linux)"
+	echo "You must specify the base docker directory as an environment variable that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c/docker for Windows, /home/webd/docker for Linux)"
 
 	# define the base directory for the prepared working directory (the directory that will be used to build and execute the docker container)
 	read base_docker_directory

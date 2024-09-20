@@ -51,6 +51,7 @@ This project was developed to provide an automated method to capture performance
             # execute the preparation script (in this example the remote scenario):
             bash ./PIFSC-Tools-SQLPlus-Query-Metrics-IBBS/deployment_scripts/prepare_docker_project.remote.sh
             ```
+        -   press the "Enter" key to dismiss the bash script message 
     -   #### Specify the DB credentials
         -   In the preparation folder update the DB_credentials.sql file to specify the Oracle SQL\*Plus database connection string (e.g. **$base_docker_directory**/sqlplus-query-metrics-ibbs-remote/docker/src/SQL/credentials/DB_credentials.sql for the remote scenario)
         -   The code below is used for the remote scenario:

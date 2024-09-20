@@ -10,7 +10,7 @@ if [[ -z "${base_docker_directory}" ]]; then
 
 	# prompt the user for the preparation folder base directory
 	echo "A \$base_docker_directory environment variable has not been defined."
-	echo "You must specify the base directory as an environment variable that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c/docker for Windows, /home/webd/docker for Linux)"
+	echo "You must specify the base docker directory as an environment variable that will be used for the preparation folder (where the docker container will be built and executed from - e.g. /c/docker for Windows, /home/webd/docker for Linux)"
 
 	# define the base directory for the prepared working directory (the directory that will be used to build and execute the docker container)
 	read base_docker_directory
@@ -18,7 +18,7 @@ if [[ -z "${base_docker_directory}" ]]; then
 fi 
 # the value of $base_docker_directory is defined, proceed with the preparation script
 
-echo "the value of \$base_docker_directory is defined, the docker container will be prepared for execution"
+echo "the value of \$base_docker_directory is defined ($base_docker_directory) the docker container will be prepared for execution"
 
 
 # change directory to the folder this script is in to ensure the include .sh script reference is valid

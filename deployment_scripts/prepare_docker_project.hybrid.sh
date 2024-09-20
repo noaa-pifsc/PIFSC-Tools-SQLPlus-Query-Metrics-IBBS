@@ -4,7 +4,6 @@
 #deployment script for hybrid scenario
 echo "running hybrid scenario deployment script"
 
-
 # check if the base_docker_directory environment variable has been defined
 if [[ -z "${base_docker_directory}" ]]; then
 	# the base_docker_directory environment variable has not been defined
