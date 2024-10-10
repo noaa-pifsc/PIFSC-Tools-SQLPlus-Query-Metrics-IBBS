@@ -32,9 +32,9 @@ Implementing additional scenarios:
 store the different testing scenarios and network scenarios in an array:
 	loop through each of the elements and delete them one by one
 
-	** Otherwise we can simply rename the config files based on the testing_scenario and path_network_connection and then remove the other files using wildcards/regexp:
+	** X Otherwise we can simply rename the config files based on the testing_scenario and path_network_connection and then remove the other files using wildcards/regexp:
 	
-	
+_ update the traceroute to capture separate logs for each network/location scenario
 
 
 

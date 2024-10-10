@@ -54,7 +54,7 @@ cp ../oracle_configuration/* ${ORACLE_CONFIG_PATH}
 # check if the .csv metrics file already exists, if not create it with the appropriate headers:
 if ! test -f ../data_exports/$csv_output_file_name; then
 	# the file does not exist, create it:
-	echo "\"DB Name\",\"DB Location\",\"App Location\",\"Query Name\",\"Date/Time (UTC)\",\"Date/Time (HST)\",\"Cost\",\"# Rows\",\"SQL\",\"Response Time (s)\",\"Result Set Size (bytes)\"" > ../data_exports/$csv_output_file_name
+	echo "\"DB Name\",\"DB Location\",\"App Location\",\"Network\",\"Query Name\",\"Date/Time (UTC)\",\"Date/Time (HST)\",\"Cost\",\"# Rows\",\"SQL\",\"Response Time (s)\",\"Result Set Size (bytes)\"" > ../data_exports/$csv_output_file_name
 
 fi
 
