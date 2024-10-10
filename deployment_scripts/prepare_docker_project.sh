@@ -33,9 +33,15 @@ else
 	inactive_scenarios=("local" "remote")
 fi
 
+# replace the network_connection string's spaces with dashes
+path_network_connection="${network_connection// /-}"
+
+path_network_connection="$path_network_connection" | awk '{print tolower($0)}'
+
+
 
 #deployment script for $testing_scenario scenario
-echo "running $testing_scenario scenario deployment script"
+echo "running $path_network_connection $testing_scenario scenario deployment script"
 
 # check if the base_docker_directory environment variable has been defined
 if [[ -z "${base_docker_directory}" ]]; then
@@ -58,7 +64,10 @@ fi
 
 
 # construct the project folder name based on the configuration variables:
-project_folder_name=$project_path"-"$testing_scenario
+project_folder_name=$project_path"-"$path_network_connection"-"$testing_scenario
+
+echo "The value of project_folder_name is: $project_folder_name"
+
 
 # construct the full project path
 full_project_path=$base_docker_directory"/"$project_folder_name"/docker/src"
