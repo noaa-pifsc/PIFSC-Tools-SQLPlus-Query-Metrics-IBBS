@@ -9,4 +9,4 @@ database_location="remote"
 container_location="local"
 
 # network connection
-network_connection="East Coast VPN"
+network_connection="East VPN"

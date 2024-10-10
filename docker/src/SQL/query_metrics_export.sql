@@ -1,3 +1,38 @@
+/************************************************************************************
+ Filename   : query_metrics_export.sql
+ Purpose    : Automated script for capturing 
+************************************************************************************/
+
+SET FEEDBACK ON
+SET TRIMSPOOL ON
+SET VERIFY OFF
+SET SQLBLANKLINES ON
+SET AUTOCOMMIT OFF
+SET EXITCOMMIT OFF
+SET ECHO OFF
+
+WHENEVER SQLERROR EXIT 1
+WHENEVER OSERROR  EXIT 1
+
+
+SET DEFINE ON
+
+--load the runtime configuration:
+@@./sqlplus_config/runtime_config.sql
+
+--load the scenario configuration:
+@@./sqlplus_config/scenario_config.sql
+
+
+-- Provide credentials in the form: USER@TNS/PASSWORD when using a TNS Name
+-- Provide credentials in the form: USER/PASSWORD@HOSTNAME/SID when specifying hostname and SID values
+--DEFINE apps_credentials=&1
+SET ECHO OFF
+@@credentials/DB_credentials.sql
+CONNECT &apps_credentials
+--SET ECHO ON
+
+
 --SET ECHO ON;
 SET SERVEROUTPUT ON;
 
@@ -185,3 +220,8 @@ PROMPT &V_CURRENT_DATE_TIME_UTC. - Finished capturing metrics for the query: &1.
 SPOOL OFF;
 
 
+--SET ECHO OFF;
+
+DISCONNECT;
+
+EXIT;
