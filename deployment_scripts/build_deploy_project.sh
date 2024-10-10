@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 # load the project configuration script to set the runtime variable values
 . ../docker/src/scripts/sh_script_config/project_deploy_config.sh
 
-# change directory to the working directory for the remote scenario
+# change directory to the working directory
 cd ../docker
 
 # check if this is windows or linux

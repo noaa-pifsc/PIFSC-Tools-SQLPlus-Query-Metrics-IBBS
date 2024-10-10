@@ -34,7 +34,7 @@ else
 fi
 
 
-#deployment script for local scenario
+#deployment script for $testing_scenario scenario
 echo "running $testing_scenario scenario deployment script"
 
 # check if the base_docker_directory environment variable has been defined
@@ -113,6 +113,7 @@ do
 done
 
 
+# notify the user that the docker project has been prepared and is ready for configuration and building/deployment:
 
 echo ""
 echo "the $testing_scenario docker project files are now ready for configuration and image building/deployment"

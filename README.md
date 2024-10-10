@@ -1,19 +1,19 @@
-# SQLPlus Query Metrics - IBBS
+# SQL\*Plus Query Metrics - IBBS
 
 ## Overview
-This project was developed to provide an automated method to capture performance metrics for a suite of Oracle queries using a docker container to execute them with SQL\*Plus.  This project provides a method to capture query metrics in a variety of configurations for flexibility and allows a user to define multiple queries and define the SQL\*Plus connection string to determine which Oracle database instance to execute the queries on.  This project is forked from the [SQLPlus Query Metrics project](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics).
+This SQL\*Plus Query Metrics (SQM) International Billfish Biosampling System (IBBS) project was developed to provide an automated method to capture performance metrics for a suite of Oracle queries using a docker container to execute them with SQL\*Plus for the IBBS database.  This project provides a method to capture query metrics in a variety of configurations for flexibility and allows a user to define multiple queries and define the SQL\*Plus connection string to determine which Oracle database instance to execute the queries on.  This project is forked from the [SQM project](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics).
 
 ## Resources
--   SQLPlus Query Metrics - IBBS Version Control Information:
+-   SQM IBBS Version Control Information:
     -   URL: https://github.com/noaa-pifsc/PIFSC-Tools-SQLPlus-Query-Metrics-IBBS.git
-    -   Version: 1.3 (Git tag: ibbs_sqlplus_query_metrics_v1.3)
+    -   Version: 1.4 (Git tag: ibbs_sqlplus_query_metrics_v1.4)
     -   Forked repository (upstream)
-        -   [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics/blob/main/README.md)
-        -   SQLPlus Query Metrics Version Control Information:
+        -   [SQM README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics/blob/main/README.md)
+        -   SQM Version Control Information:
             -   URL: git@github.com:noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics.git
             -   Version: 1.2 (Git tag: sqlplus_query_metrics_v1.2)
 -   [Detailed/Summary performance metrics](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?usp=drive_link&ouid=107579489323446884981&rtpof=true&sd=true)
-    -   The local/hybrid projects were configured to run on an hourly basis each weekday for 12 hours (from 7 AM to 7 PM HST)
+    -   During the testing window the local/hybrid projects were configured to run on an hourly basis each weekday for 12 hours (from 7 AM to 7 PM HST)
     -   The [ibbs-query-metrics tab](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?gid=2040068626#gid=2040068626) contains the detailed information for each query that was executed and the corresponding metrics that were captured
     -   The [Summary tab](https://docs.google.com/spreadsheets/d/1iMsI3dJOpzyzH0t-DAYBUajPaK2hxfE4/edit?gid=1385076456#gid=1385076456) contains the summarized information with comparisons between the different scenarios
 
@@ -73,7 +73,7 @@ This project was developed to provide an automated method to capture performance
         -   This preparation folder will be used to build and execute the docker container
     -   #### Specify the DB credentials
         -   In the preparation folder update the DB_credentials.sql file to specify the Oracle SQL\*Plus database connection string (e.g. **$base_docker_directory**/sqlplus-query-metrics-ibbs-remote/docker/src/SQL/credentials/DB_credentials.sql for the remote scenario)
--   \*Note: more information about the setup procedure for this forked project is available in the [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#forked-repository-implementation)
+-   \*Note: more information about the setup procedure for this forked project is available in the [SQM README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#forked-repository-implementation)
 
 ## Building/Running Container
 -   In the preparation folder execute the appropriate build and deploy script for the given scenario
@@ -87,13 +87,26 @@ This project was developed to provide an automated method to capture performance
         -   On Windows the batch script can be used to automate the execution of the docker container on a timer using Scheduled Tasks (e.g. **$base_docker_directory**/sqlplus-query-metrics-ibbs-remote/deployment_scripts/build_deploy_project.bat for the remote scenario)
 
 ## Docker Application Processing
--   \*Note: more information about the docker application processing for this forked project is available in the [SQLPlus Query Metrics README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#docker-application-processing)
+-   \*Note: more information about the docker application processing for this forked project is available in the [SQM README](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#docker-application-processing)
 
 ## Checking Results
 -   Open the docker volume sqlplus-query-metrics-ibbs-logs to view the log files for the different executions of the docker container
 -   Open the docker volume sqlplus-query-metrics-ibbs-data to view the exported data files for the different queries
     -   Open the ibbs-query-metrics.csv to view the metrics that were captured for each query execution
     -   Open the .csv files in the query_results folder to view the results of each query
+
+## Standard Metrics/Information Logging
+-   The following metrics and information is captured for each web action in a .csv file:
+		-   DB Name - The name of the database (IBBS)
+		-   DB Location - is the location of the database (local or remote)
+		-   App Location - is the location of the SQM IBBS docker container (local or remote)
+    -   Date/Time (UTC) - The Date/Time the given SQL query test was started in the UTC time zone in MM/DD/YYYY HH:MI:SS AM/PM format
+    -   Date/Time (HST) - The Date/Time the given SQL query test was started in the Hawaii Standard time zone in MM/DD/YYYY HH:MI:SS AM/PM format
+    -   Cost - The cost of the given SQL query as calculated on the corresponding database instance
+    -   \# Rows - The total number of rows returned by the given SQL query
+    -   SQL - The SQL query that is executed on the given database instance
+    -   Response Time (s) - The total number of seconds elapsed between when the SQL query is sent to the given database instance and when the result set is finished downloading
+    -   Result Set Size (bytes) - the total size, in bytes, for the result set downloaded from the given database instance
 
 ## License
 See the [LICENSE.md](./LICENSE.md) for details
