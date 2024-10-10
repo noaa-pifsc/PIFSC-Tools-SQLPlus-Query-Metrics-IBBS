@@ -78,7 +78,7 @@ filename="${filename%.*}"
 # filename_w_date_time=$filename$(date "+_%Y-%m-%d_%H.%M.%S")
 
 # execute the sqlplus script for the current SQL file/query
-eval "sqlplus /nolog @query_metrics_calling_script.sql \"$filename\" \"$value\""
+eval "sqlplus /nolog @query_metrics_export.sql \"$filename\" \"$value\""
 
 filesize=$(ls -l ../data_exports/query_results/$filename.csv | awk '{print $5}')
 # echo $filesize

@@ -90,7 +90,7 @@ git clone  $git_url $base_docker_directory/$project_folder_name
 echo "rename corresponding configuration files to make them active"
 
 #rename the query_metrics_calling_script.$testing_scenario.sql to query_metrics_calling_script.sql so it can be used as the active configuration file
-mv $full_project_path/SQL/sqlplus_config/scenario_config.$path_network_connection.$testing_scenario.sql $full_project_path/SQL/scenario_config.sql
+mv $full_project_path/SQL/sqlplus_config/scenario_config.$path_network_connection.$testing_scenario.sql $full_project_path/SQL/sqlplus_config/scenario_config.sql
 
 #rename the $testing_scenario oracle configuration file to be the active configuration file
 mv $full_project_path/oracle_configuration/tnsnames.$testing_scenario.ora $full_project_path/oracle_configuration/tnsnames.ora
