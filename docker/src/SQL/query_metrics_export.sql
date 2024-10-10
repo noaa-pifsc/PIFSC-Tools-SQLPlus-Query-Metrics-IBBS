@@ -38,6 +38,8 @@ SET SERVEROUTPUT ON;
 
 SET DEFINE ON
 
+SET TERMOUT OFF;
+
 --define the columns for the current date and date/time in UTC
 COLUMN CURRENT_DATE_UTC new_value V_CURRENT_DATE_UTC
 COLUMN CURRENT_DATE_TIME_UTC new_value V_CURRENT_DATE_TIME_UTC
