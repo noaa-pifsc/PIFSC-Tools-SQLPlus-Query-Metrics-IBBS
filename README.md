@@ -105,6 +105,9 @@ This SQL\*Plus Query Metrics (SQM) International Billfish Biosampling System (IB
 ## Checking Results
 -   Open the docker volume sqlplus-query-metrics-ibbs-logs to view the log files for the different executions of the docker container
     -   The log files will have the following names: query_metrics_log_YYYYMMDD.log with the date in the UTC timezone (e.g. query_metrics_log_20241007.log for a script that began running on 10/7/2024 in the UTC timezone)
+    -   There are one or more separate traceroute logs depending on the scenario
+        -   For example when the Pacific VPN network/hybrid scenario the pacific-vpn.local_traceroute.log and pacific-vpn.remote_traceroute.log files will contain the results of the corresponding traceroute scripts
+        -   For more information about the tracelog feature see the [SQM documentation](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#docker-application-processing) 
 -   Open the docker volume sqlplus-query-metrics-ibbs-data to view the exported data files for the different queries
     -   Open the ibbs-query-metrics.csv to view the metrics that were captured for each query execution
     -   Open the .csv files in the query_results folder to view the results of each query
