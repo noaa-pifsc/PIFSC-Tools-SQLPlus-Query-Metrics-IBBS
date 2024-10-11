@@ -10,18 +10,11 @@ if [[ "$database_location" == "local" ]] && [[ "$container_location" == "local" 
 	# set the value of $testing_scenario to "local"
 	testing_scenario="local"
 	
-	# define the inactive scenarios (the two that are not stored in $testing_scenario)
-	inactive_scenarios=("hybrid" "remote")
-	
-
 elif [[ "$database_location" == "remote" ]] && [[ "$container_location" == "remote" ]]; then
 	# this is a remote database and container, this is a remote scenario
 
 	# set the value of $testing_scenario to "remote"
 	testing_scenario="remote"
-
-	# define the inactive scenarios (the two that are not stored in $testing_scenario)
-	inactive_scenarios=("local" "hybrid")
 
 else
 	# this is a remote database and local container, this is a hybrid scenario
@@ -29,8 +22,6 @@ else
 	# set the value of $testing_scenario to "hybrid"
 	testing_scenario="hybrid"
 
-	# define the inactive scenarios (the two that are not stored in $testing_scenario)
-	inactive_scenarios=("local" "remote")
 fi
 
 # replace the network_connection string's spaces with dashes
@@ -42,7 +33,7 @@ path_network_connection="${path_network_connection,,}"
 
 
 #deployment script for $testing_scenario scenario
-echo "running $path_network_connection $testing_scenario scenario deployment script"
+echo "running $network_connection $testing_scenario scenario deployment script"
 
 # check if the base_docker_directory environment variable has been defined
 if [[ -z "${base_docker_directory}" ]]; then
@@ -117,7 +108,7 @@ rm $full_project_path"/scripts/sh_script_config/project_scenario_config."*.*.sh
 # notify the user that the docker project has been prepared and is ready for configuration and building/deployment:
 
 echo ""
-echo "the $testing_scenario docker project files are now ready for configuration and image building/deployment"
+echo "the $network_connection $testing_scenario docker project files are now ready for configuration and image building/deployment"
 echo ""
 echo ""
 echo "press Enter key to continue"
