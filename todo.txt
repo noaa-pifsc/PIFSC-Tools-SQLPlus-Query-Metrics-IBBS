@@ -1,3 +1,50 @@
+X Implementing additional scenarios:
+	expanded scenarios:
+		local
+			PIFSC ethernet
+				pifsc-ethernet
+			VPN
+				pacific-vpn
+		hybrid
+			PIFSC ethernet
+				pifsc-ethernet
+			VPN
+				pacific-vpn
+				east-vpn
+				west-vpn
+		remote
+			FishSTOC network
+		
+
+X Update documentation to reference the shell scripts for the differet scenarios and the different config files (.sql, etc.)
+
+
+
+* X Simply rename the config files based on the testing_scenario and path_network_connection and then remove the other files using wildcards/regexp:
+	
+X update the traceroute to capture separate logs for each network/location scenario
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 X develop automation schedule (cron job) for executing the existing docker images (hourly between 7 AM to 7 PM each day)
 	X Implement as a Windows scheduled task
 

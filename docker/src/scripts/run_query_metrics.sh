@@ -4,8 +4,15 @@
 . ../scripts/sh_script_config/project_runtime_config.sh
 . ../scripts/sh_script_config/project_scenario_config.sh
 
-# check the location of the DB and container:
 
+# replace the network_connection string's spaces with dashes
+path_network_connection="${network_connection// /-}"
+
+# convert the string to lowercase
+path_network_connection="${path_network_connection,,}"
+
+
+# check the location of the DB and container:
 if [ "$database_location" = "local" ]  && [ "$container_location" = "local" ];
 then
 # local DB and container
@@ -13,7 +20,7 @@ then
 echo "this is a local DB and container, run the local traceroute script in a loop"
 
 # spawn the local traceroute script that runs in a loop
-. ../scripts/traceroute_loop.sh $local_traceroute_destination "local" $traceroute_wait_in_s & 
+. ../scripts/traceroute_loop.sh $local_traceroute_destination $path_network_connection".local" $traceroute_wait_in_s & 
 
 
 
@@ -25,12 +32,12 @@ then
 echo "this is a remote DB and local container, run the local traceroute script once and then run the remote traceroute in a loop"
 
 # spawn the local traceroute script that runs in a loop
-. ../scripts/traceroute_loop.sh $local_traceroute_destination "local" $traceroute_wait_in_s &
+. ../scripts/traceroute_loop.sh $local_traceroute_destination $path_network_connection".local" $traceroute_wait_in_s &
 
 
 
 # spawn the remote traceroute script that runs in a loop
-. ../scripts/traceroute_loop.sh $remote_traceroute_destination "remote" $traceroute_wait_in_s &
+. ../scripts/traceroute_loop.sh $remote_traceroute_destination $path_network_connection".remote" $traceroute_wait_in_s &
 
 
 else
@@ -39,7 +46,7 @@ else
 echo "this is a remote DB and container, run the remote traceroute script in a loop"
 
 # spawn the local traceroute script that runs in a loop
-. ../scripts/traceroute_loop.sh $remote_traceroute_destination "remote" $traceroute_wait_in_s &
+. ../scripts/traceroute_loop.sh $remote_traceroute_destination $path_network_connection".remote" $traceroute_wait_in_s &
 
 
 fi 
@@ -54,7 +61,7 @@ cp ../oracle_configuration/* ${ORACLE_CONFIG_PATH}
 # check if the .csv metrics file already exists, if not create it with the appropriate headers:
 if ! test -f ../data_exports/$csv_output_file_name; then
 	# the file does not exist, create it:
-	echo "\"DB Name\",\"DB Location\",\"App Location\",\"Query Name\",\"Date/Time (UTC)\",\"Date/Time (HST)\",\"Cost\",\"# Rows\",\"SQL\",\"Response Time (s)\",\"Result Set Size (bytes)\"" > ../data_exports/$csv_output_file_name
+	echo "\"DB Name\",\"DB Location\",\"App Location\",\"Network\",\"Query Name\",\"Date/Time (UTC)\",\"Date/Time (HST)\",\"Cost\",\"# Rows\",\"SQL\",\"Response Time (s)\",\"Result Set Size (bytes)\"" > ../data_exports/$csv_output_file_name
 
 fi
 
@@ -78,7 +85,7 @@ filename="${filename%.*}"
 # filename_w_date_time=$filename$(date "+_%Y-%m-%d_%H.%M.%S")
 
 # execute the sqlplus script for the current SQL file/query
-eval "sqlplus /nolog @query_metrics_calling_script.sql \"$filename\" \"$value\""
+eval "sqlplus /nolog @query_metrics_export.sql \"$filename\" \"$value\""
 
 filesize=$(ls -l ../data_exports/query_results/$filename.csv | awk '{print $5}')
 # echo $filesize

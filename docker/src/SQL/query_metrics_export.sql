@@ -1,7 +1,44 @@
+/************************************************************************************
+ Filename   : query_metrics_export.sql
+ Purpose    : Automated script for capturing 
+************************************************************************************/
+
+SET FEEDBACK ON
+SET TRIMSPOOL ON
+SET VERIFY OFF
+SET SQLBLANKLINES ON
+SET AUTOCOMMIT OFF
+SET EXITCOMMIT OFF
+SET ECHO OFF
+
+WHENEVER SQLERROR EXIT 1
+WHENEVER OSERROR  EXIT 1
+
+
+SET DEFINE ON
+
+--load the runtime configuration:
+@@./sqlplus_config/runtime_config.sql
+
+--load the scenario configuration:
+@@./sqlplus_config/scenario_config.sql
+
+
+-- Provide credentials in the form: USER@TNS/PASSWORD when using a TNS Name
+-- Provide credentials in the form: USER/PASSWORD@HOSTNAME/SID when specifying hostname and SID values
+--DEFINE apps_credentials=&1
+SET ECHO OFF
+@@credentials/DB_credentials.sql
+CONNECT &apps_credentials
+--SET ECHO ON
+
+
 --SET ECHO ON;
 SET SERVEROUTPUT ON;
 
 SET DEFINE ON
+
+SET TERMOUT OFF;
 
 --define the columns for the current date and date/time in UTC
 COLUMN CURRENT_DATE_UTC new_value V_CURRENT_DATE_UTC
@@ -176,7 +213,7 @@ SPOOL OFF;
 
 --add an entry in the .csv file with associated metrics for the query that was just executed
 SPOOL ../data_exports/&V_CSV_OUTPUT_FILE_NAME. append;
-PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&1.","&V_START_DATE_TIME_UTC.","&V_START_DATE_TIME_HST.","&V_QUERY_COST.","&V_NUM_ROWS.","&2.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
+PROMPT "&V_DB_NAME.","&V_DB_LOCATION_NAME","&V_APP_LOCATION_NAME","&V_NETWORK_NAME.","&1.","&V_START_DATE_TIME_UTC.","&V_START_DATE_TIME_HST.","&V_QUERY_COST.","&V_NUM_ROWS.","&2.","&V_ELAPSED_TIME_SEC.","[FILE_SIZE]";
 SPOOL OFF;
 
 --log that the entire script has finished executing
@@ -185,3 +222,8 @@ PROMPT &V_CURRENT_DATE_TIME_UTC. - Finished capturing metrics for the query: &1.
 SPOOL OFF;
 
 
+--SET ECHO OFF;
+
+DISCONNECT;
+
+EXIT;

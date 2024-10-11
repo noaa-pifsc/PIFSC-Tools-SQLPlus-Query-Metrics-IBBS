@@ -7,3 +7,6 @@ database_location="remote"
 
 # container location
 container_location="local"
+
+# network connection
+network_connection="Pacific VPN"
