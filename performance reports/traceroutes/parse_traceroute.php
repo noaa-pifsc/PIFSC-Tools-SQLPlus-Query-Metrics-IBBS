@@ -13,10 +13,10 @@
 			//check the current file
 
 			//check to see if the current file in the directory is a traceroute log file
-			if (preg_match('/([a-zA-Z\-]+)\.([a-zA-Z]+)\_traceroute\.[0-9]+\.log/', $filename, $matches))
+			if (preg_match('/([a-zA-Z\-]+)\.([a-zA-Z]+)\_traceroute\.log/', $filename, $matches))
 			{
 				//the current file is a traceroute log file
-				echo "the current file ($filename) in the directory is a traceroute log file\n";
+//				echo "the current file ($filename) in the directory is a traceroute log file\n";
 
 				//load the traceroute log file's content
 				$v_data = file_get_contents($filename);
@@ -38,12 +38,21 @@
 						//extract the current traceroute command 
 						$temp_match = substr($v_data, 0, ($total_offset = strlen($matches[0][0])+$matches[0][1]));
 
-						//parse the current traceroute command to extract the statistics
-						preg_match('/([0-9]{8} [0-9]{2}\:[0-9]{2}\:[0-9]{2} (AM|PM)) \(UTC\) \- Start the traceroute.+traceroute to ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|[a-zA-Z0-9\.]+).+\ +([0-9]{1,})\ +[0-9a-zA-Z\(\. ]+\)\ +([0-9]+\.[0-9]+\ ms|\*)\ +([0-9]+\.[0-9]+\ ms|\*)\ +([0-9]+\.[0-9]+\ ms|\*).([0-9]{8} [0-9]{2}\:[0-9]{2}\:[0-9]{2} (AM|PM)) \(UTC\) \- Traceroute has ended/s', $temp_match, $matches);
-
-						//generate a csv file row with the current traceroute command statistics
-						$csv_content.="\n\"".$scenario."\",\"".$network."\",\"".$matches[3]."\",\"".$matches[1]."\",\"".$matches[8]."\",\"".$matches[4]."\",\"".str_replace(" ms", "", $matches[5])."\",\"".str_replace(" ms", "", $matches[6])."\",\"".str_replace(" ms", "", $matches[7])."\"";
+//						echo "The value of \$temp_match is: ".$temp_match."\n";
 						
+						
+						//parse the current traceroute command to extract the statistics
+						if (preg_match('/([0-9]{8} [0-9]{2}\:[0-9]{2}\:[0-9]{2} (AM|PM)) \(UTC\) \- Start the traceroute.+traceroute to ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|[a-zA-Z0-9\.]+).+\ +([0-9]{1,})\ +[0-9a-zA-Z\(\. ]+\)\ +([0-9]+\.[0-9]+\ ms|\*)\ +([0-9]+\.[0-9]+\ ms|\*)\ +([0-9]+\.[0-9]+\ ms|\*).([0-9]{8} [0-9]{2}\:[0-9]{2}\:[0-9]{2} (AM|PM)) \(UTC\) \- Traceroute has ended/s', $temp_match, $matches))
+						{
+							//the current traceroute command was parsed successfully:
+
+//							echo "The value of \$matches is: ".var_export($matches, true)."\n";
+
+							//generate a csv file row with the current traceroute command statistics
+							$csv_content.="\n\"".$scenario."\",\"".$network."\",\"".$matches[3]."\",\"".$matches[1]."\",\"".$matches[8]."\",\"".$matches[4]."\",\"".str_replace(" ms", "", $matches[5])."\",\"".str_replace(" ms", "", $matches[6])."\",\"".str_replace(" ms", "", $matches[7])."\"";
+							
+						}
+
 						//remove the current traceroute command from the $v_data variable so the next command can be processed
 						$v_data = trim(substr($v_data, $total_offset));
 					}

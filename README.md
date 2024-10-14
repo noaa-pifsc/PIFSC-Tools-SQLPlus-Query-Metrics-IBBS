@@ -107,9 +107,16 @@ This SQL\*Plus Query Metrics (SQM) International Billfish Biosampling System (IB
     -   The log files will have the following names: query_metrics_log_YYYYMMDD.log with the date in the UTC timezone (e.g. query_metrics_log_20241007.log for a script that began running on 10/7/2024 in the UTC timezone)
     -   There are one or more separate traceroute logs depending on the scenario
         -   For example when the Pacific VPN network/hybrid scenario the pacific-vpn.local_traceroute.log and pacific-vpn.remote_traceroute.log files will contain the results of the corresponding traceroute scripts
-        -   For more information about the tracelog feature see the [SQM documentation](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#docker-application-processing) 
+        -   For more information about the tracelog feature see the [SQM documentation](https://github.com/noaa-pifsc/PIFSC-Tools-SqlPlus-Query-Metrics?tab=readme-ov-file#docker-application-processing)
+    -   Summarize the traceroute data:
+        -   Copy the traceroute files for each scenario from the docker volume (e.g. pacific-vpn.remote_traceroute.log for the Pacific VPN network and Remote scenario) into the [traceroutes](./performance%20reports/traceroutes) folder
+        -   Execute the [parse_traceroute.php](./performance%20reports/traceroutes/parse_traceroute.php) script to generate a .csv file (parsed_traceroute_data.csv) that contains the information from each traceroute command.
+            -   The [parse_traceroute.bat](./performance%20reports/traceroutes/parse_traceroute.bat) script can be executed on a Windows machine to execute the PHP script
+        -   Open the parsed_traceroute_data.csv and [combined_traceroute_summary.xlsx](./performance%20reports/traceroutes/combined_traceroute_summary.xlsx) excel file, copy the data from parsed_traceroute_data.csv into the "traceroute data" worksheet and view the summary information in the "Summary" worksheet.
 -   Open the docker volume sqlplus-query-metrics-ibbs-data to view the exported data files for the different queries
     -   Open the ibbs-query-metrics.csv to view the metrics that were captured for each query execution
+        -   Summarize the performance metrics:
+            -   Open the parsed_traceroute_data.csv and [ibbs-query-metrics-combined.xlsx](./performance%20reports/ibbs-query-metrics-combined.xlsx) excel file, copy the data from ibbs-query-metrics.csv into the "ibbs-query-metrics" worksheet and view the summary information in the "Summary" worksheet.
     -   Open the .csv files in the query_results folder to view the results of each query
 
 ## Standard Metrics/Information Logging
